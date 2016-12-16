@@ -1,25 +1,67 @@
-<div class="row">
-  <div class="col-md-6 stores-panel">
-    <h1><% @stores.each do |store| %></h1>
-      <div class="store-block">
-        <div class="row">
-          <div class="col-md-2">
-            <span class="store-name"><a href="/stores/<%= store.id%>"><%= store.name %></a></span>
-          </div>
-          <div class="col-md-1">
-              <form class="" action="/stores/<%= store.id %>" method="post">
+    <% if @store %>
+      <h1><%= @store.name %></h1>
+      <div class="row">
+        <div class="col-md-6">
+        <% @store.shoes.each do |shoe|%>
+          <div class="row">
+            <div class="col-sm-3">
+              <span><%= shoe.name %></span>
+            </div>
+            <div class="col-sm-3">
+              <form action="/stores/<%= @store.id %>/shoes" method="post">
                 <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                <input type="hidden" name="shoe_id" value="<%= shoe.id %>">
+                <button type="submit" class="btn btn-danger btn-xs">Remove</button>
               </form>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <% if @shoes %>
+        <h2>Add more shoes to this store</h2>
+          <form action="/stores/<%= @store.id %>/shoes" method="post">
+            <input type="hidden" name="_method" value="patch">
+              <% @shoes.each do |shoe| %>
+                <div class="form-group">
+                  <label for="shoe_ids[]"><input type="checkbox" name="shoe_ids[]" value="<%= shoe.id %>"><%= shoe.name %></label>
+                </div>
+              <% end %>
+            <button type="submit" class="btn btn-success">Add</button>
+          </form>
+        <% end %>
+      </div>
+    </div>
+    <form action="/stores/<%= @store.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+    <label for="edit_name">Edit store name: </label>
+      <input type="text" name="edit_name" value="<%= @store.name %>">
+      <button type="submit" class="btn btn-warning btn-xs">Edit</button>
+    </form>
+    <% else %>
+    <div class="row">
+      <div class="col-md-6 stores-panel">
+      <h1><% @stores.each do |store| %></h1>
+        <div class="store-block">
+          <div class="row">
+            <span class="store-name">
+            <div class="col-md-3">
+              <a href="/stores/<%= store.id%>"><%= store.name %> </a>
+            </div>
+            <div class="col-md-1">
+                <form class="" action="/stores/<%= store.id %>" method="post">
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                </form>
+            </div>
+            </span>
           </div>
         </div>
-
-      </div>
-    <% end %>
-    <form action="/stores/new" method="post">
-      <input type="text" name='store_name' placeholder="Add a store" class="form-control">
-      <button type="submit" class="btn btn-success">Add a store</button>
-    </form>
+      <% end %>
+      <form action="/stores/new" method="post">
+        <input type="text" name='store_name' placeholder="Add a store" class="form-control">
+        <button type="submit" class="btn btn-success">Add a store</button>
+      </form>
   </div>
   <div class="col-md-6 shoes-panel">
     <% @shoes.each do |shoe|%>
@@ -28,12 +70,8 @@
           <span><%= shoe.name %></span>
         </div>
         <div class="col-sm-3">
-          <form class="" action="index.html" method="post">
-            <button type="submit" class="btn btn-warning btn-xs">Edit</button>
-          </form>
-        </div>
-        <div class="col-sm-3">
-          <form class="" action="index.html" method="post">
+          <form action="/shoes/<%= shoe.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger btn-xs">Delete</button>
           </form>
         </div>
@@ -45,3 +83,4 @@
     </form>
   </div>
 </div>
+<% end %>
