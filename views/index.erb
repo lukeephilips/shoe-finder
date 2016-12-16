@@ -1,22 +1,9 @@
     <% if @store %>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
           <div class="row">
             <div class="col-md-4">
               <span class="heading"><%= @store.name %> </span>
-            </div>
-            <div class="col-md-4">
-              <form action="/stores/<%= @store.id %>" method="post">
-                <input type="hidden" name="_method" value="patch">
-                <div class="row">
-                  <div class="col-xs-10">
-                    <input type="text" name="edit_name" placeholder="<%= @store.name %>" class="form-control input-sm">
-                  </div>
-                  <div class="col-xs-1">
-                    <button type="submit" class="btn btn-warning btn-sm">Edit</button>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
         <% @store.shoes.each do |shoe|%>
@@ -34,7 +21,7 @@
           </div>
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <span class="heading">Change shoes at <%= @store.name%></span>
         <% if @shoes %>
           <form action="/stores/<%= @store.id %>/shoes" method="post">
@@ -48,15 +35,27 @@
                     ><%= shoe.name %></label>
                 </div>
               <% end %>
-            <button type="submit" class="btn btn-success">Add</button>
+            <button type="submit" class="btn <btn-info></btn-info>">Change</button>
           </form>
         <% end %>
       </div>
     </div>
-
+    <div class="row">
+      <div class="col-md-4 col-md-offset-3 shoe-to-store">
+        <form action="/stores/<%= @store.id %>" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <div class="input-group">
+              <input type="text" name="edit_name" placeholder="Edit store name: <%= @store.name %>" class="form-control input-sm">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
     <% else %>
     <div class="row">
-      <div class="col-md-6 stores-panel">
+      <div class="col-md-7 stores-panel">
       <span class="heading">Stores</span>
       <% @stores.each do |store| %>
         <div class="store-block">
@@ -86,7 +85,7 @@
         </div>
       </form>
   </div>
-  <div class="col-md-6 shoes-panel">
+  <div class="col-md-5 shoes-panel">
     <span class="heading">All Shoes</span>
     <% @shoes.each do |shoe|%>
       <div class="row">
@@ -111,26 +110,30 @@
         </div>
       </div>
     </form>
-    <br>
+  </div>
+</div>
+<% end %>
+<div class="row shoe-to-store">
+  <div class="col-md-6 col-md-offset-3">
     <% if @shoes and @stores %>
-      <div class="row">
+      <div class="row ">
         <div class="col-sm-12">
           <form class="form-inline" action="/stores/shoes" method="post">
-            <div class="input-group">
-              <span class='input-group-addon'>Add</span>
+            <div class="input-group input-group-sm">
+              <span class='input-group-addon'>Add shoe </span>
               <select class="selectpicker form-control" name="shoe_to">
                 <% @shoes.each do |shoe| %>
                   <option value="<%= shoe.id%>"><%= shoe.name%></option>
                 <% end %>
               </select>
-              <span class='input-group-addon'> to </span>
+              <span class='input-group-addon'> to store </span>
               <select class=" selectpicker form-control" name="to_store">
                 <% @stores.each do |store| %>
                   <option value="<%= store.id%>"><%= store.name%></option>
                 <% end %>
               </select>
               <span class="input-group-btn">
-              <button type="submit" class='btn btn-primary'>Go</button></span>
+              <button type="submit" class='btn btn-primary'>Add</button></span>
             </div>
           </form>
         </div>
@@ -138,4 +141,3 @@
     <% end %>
   </div>
 </div>
-<% end %>

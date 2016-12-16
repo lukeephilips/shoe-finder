@@ -12,12 +12,6 @@ button {
   min-width: 70px;
 }
 
-input[type=text] {
-}
-.little-label {
-  width: 10px;
-}
-.little-drop {
-  max-width: 200px;
-  color: red;
+.shoe-to-store {
+  margin-top: 40px;
 }
