@@ -1,0 +1,7 @@
+.store-block {
+  border-bottom: 1px solid grey;
+}
+.store-name {
+  font-size: 2em;
+  color: indigo;
+}
