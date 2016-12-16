@@ -1,0 +1,25 @@
+<div class="row">
+  <h1><%= @store.name %></h1>
+  <form action="/stores/<%= @store.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="text" name="edit_name" value="<%= @store.name %>">
+    <button type="submit" class="btn btn-warning btn-xs">Edit</button>
+  </form>
+  <% @store.shoes.each do |shoe|%>
+    <div class="row">
+      <div class="col-sm-3">
+        <span><%= shoe.name %></span>
+      </div>
+      <div class="col-sm-3">
+        <form class="" action="index.html" method="post">
+          <button type="submit" class="btn btn-warning btn-xs">Edit</button>
+        </form>
+      </div>
+      <div class="col-sm-3">
+        <form class="" action="index.html" method="post">
+          <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+        </form>
+      </div>
+    </div>
+  <% end %>
+</div>
