@@ -1,25 +1,42 @@
     <% if @store %>
-      <h1><%= @store.name %></h1>
       <div class="row">
         <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              <span class="heading"><%= @store.name %> </span>
+            </div>
+            <div class="col-md-4">
+              <form action="/stores/<%= @store.id %>" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <div class="row">
+                  <div class="col-xs-10">
+                    <input type="text" name="edit_name" placeholder="<%= @store.name %>" class="form-control input-sm">
+                  </div>
+                  <div class="col-xs-1">
+                    <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         <% @store.shoes.each do |shoe|%>
           <div class="row">
-            <div class="col-sm-3">
-              <span><%= shoe.name %></span>
+            <div class="col-sm-4">
+              <span class="store-shoes"><%= shoe.name %></span>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-1">
               <form action="/stores/<%= @store.id %>/shoes" method="post">
                 <input type="hidden" name="_method" value="delete">
                 <input type="hidden" name="shoe_id" value="<%= shoe.id %>">
-                <button type="submit" class="btn btn-danger btn-xs">Remove</button>
+                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
               </form>
             </div>
           </div>
         <% end %>
       </div>
       <div class="col-md-6">
+        <span class="heading">Add more shoes to <%= @store.name%></span>
         <% if @shoes %>
-        <h2>Add more shoes to this store</h2>
           <form action="/stores/<%= @store.id %>/shoes" method="post">
             <input type="hidden" name="_method" value="patch">
               <% @shoes.each do |shoe| %>
@@ -32,26 +49,22 @@
         <% end %>
       </div>
     </div>
-    <form action="/stores/<%= @store.id %>" method="post">
-      <input type="hidden" name="_method" value="patch">
-    <label for="edit_name">Edit store name: </label>
-      <input type="text" name="edit_name" value="<%= @store.name %>">
-      <button type="submit" class="btn btn-warning btn-xs">Edit</button>
-    </form>
+
     <% else %>
     <div class="row">
       <div class="col-md-6 stores-panel">
-      <h1><% @stores.each do |store| %></h1>
+      <span class="heading">Stores</span>
+      <% @stores.each do |store| %>
         <div class="store-block">
           <div class="row">
             <span class="store-name">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <a href="/stores/<%= store.id%>"><%= store.name %> </a>
             </div>
             <div class="col-md-1">
                 <form class="" action="/stores/<%= store.id %>" method="post">
                   <input type="hidden" name="_method" value="delete">
-                  <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </div>
             </span>
@@ -59,27 +72,40 @@
         </div>
       <% end %>
       <form action="/stores/new" method="post">
-        <input type="text" name='store_name' placeholder="Add a store" class="form-control">
-        <button type="submit" class="btn btn-success">Add a store</button>
+        <div class="row">
+          <div class="col-sm-4">
+            <input type="text" name='store_name' placeholder="Add a store" class="form-control input-sm">
+          </div>
+          <div class="col-sm-1">
+            <button type="submit" class="btn btn-sm btn-success">Add</button>
+          </div>
+        </div>
       </form>
   </div>
   <div class="col-md-6 shoes-panel">
+    <span class="heading">All Shoes</span>
     <% @shoes.each do |shoe|%>
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <span><%= shoe.name %></span>
         </div>
         <div class="col-sm-3">
           <form action="/shoes/<%= shoe.id %>" method="post">
             <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
           </form>
         </div>
       </div>
     <% end %>
     <form action="/shoes/new" method="post">
-      <input type="text" name='shoe_name' placeholder="Add a shoe" class="form-control">
-      <button type="submit" class="btn btn-success">Add a shoe</button>
+      <div class="row">
+        <div class="col-sm-4">
+          <input type="text" name='shoe_name' placeholder="Add a shoe" class="form-control input-sm">
+        </div>
+        <div class="col-sm-1">
+          <button type="submit" class="btn btn-sm btn-success">Add</button>
+        </div>
+    </div>
     </form>
   </div>
 </div>

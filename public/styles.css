@@ -1,7 +1,16 @@
-.store-block {
-  border-bottom: 1px solid grey;
-}
 .store-name {
+  font-size: 1.5em;
+}
+.store-shoes {
+  font-size: 1.5em;
+}
+.heading {
   font-size: 2em;
-  color: indigo;
+  font-weight: bold;
+}
+button {
+  min-width: 70px;
+}
+
+input[type=text] {
 }
