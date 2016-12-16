@@ -14,4 +14,10 @@ describe(Store) do
       expect(@store.shoes).to(eq([@shoe, @shoe2]))
     end
   end
+  describe('#save') do
+    it('does not save a store if the name is blank') do
+      store3 = Store.new()
+      expect(store3.save).to(eq(false))
+    end
+  end
 end
