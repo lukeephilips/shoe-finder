@@ -21,6 +21,14 @@ patch ('/stores/:id') do
       erb(:error)
     end
 end
+  delete ('/stores/:id') do
+    @store = Store.find(params['id'])
+      if @store.destroy
+        redirect "/"
+      else
+        erb(:error)
+      end
+  end
 
 post('/stores/new') do
   if Store.create(:name => params['store_name'])
