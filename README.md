@@ -16,6 +16,7 @@ Allows user to:
 * edit and delete stores
 * delete shoes from a particular store retaining all other connections
 * delete shoes
+* blocks user from duplicating existing shoes or stores with error message on page
 
 
 ## Instructions:

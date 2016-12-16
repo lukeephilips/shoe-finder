@@ -17,8 +17,14 @@ end
 
 
 post('/stores/new') do
-  if Store.create(:name => params['store_name'])
-  redirect ('/')
+  new_store = Store.new(:name => params['store_name'])
+  if new_store.save
+    redirect ('/')
+  else
+    @errors = new_store.errors
+    @stores = Store.all
+    @shoes = Shoe.all
+    erb(:index)
   end
 end
 
@@ -42,8 +48,14 @@ end
   end
 
 post('/shoes/new') do
-  if Shoe.create(:name => params['shoe_name'])
-  redirect ('/')
+  new_shoe = Shoe.new(:name => params['shoe_name'])
+  if new_shoe.save
+    redirect ('/')
+  else
+    @errors = new_shoe.errors
+    @stores = Store.all
+    @shoes = Shoe.all
+    erb(:index)
   end
 end
 
@@ -59,6 +71,19 @@ patch ('/stores/:id/shoes') do
     shoe_ids = params.fetch('shoe_ids')
   if @store.update({:shoe_ids => shoe_ids})
     redirect "/stores/#{@store.id}"
+  end
+end
+
+post ('/stores/:id/shoes') do
+  @store = Store.find(params['id'])
+  new_shoe = Shoe.new(:name => params['shoe_name'])
+  if new_shoe.save
+    @store.shoes.push(new_shoe)
+    redirect "/stores/#{@store.id}"
+  else
+    @errors = new_shoe.errors
+    @shoes = Shoe.all
+    erb(:index)
   end
 end
 

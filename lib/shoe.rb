@@ -3,6 +3,7 @@ class Shoe < ActiveRecord::Base
 
   before_save(:to_titlecase)
   validates(:name, {:presence => true})
+  validates :name, uniqueness: { case_sensitive: false }
 
 private
 

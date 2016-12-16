@@ -1,15 +1,16 @@
 .store-name {
-  font-size: 1.5em;
+  font-size: 1.3em;
+  color: red;
 }
 .store-shoes {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 .heading {
   font-size: 2em;
   font-weight: bold;
 }
 button {
-  min-width: 70px;
+  min-width: 75px;
 }
 
 .shoe-to-store {
