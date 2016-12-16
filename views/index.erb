@@ -35,13 +35,17 @@
         <% end %>
       </div>
       <div class="col-md-6">
-        <span class="heading">Add more shoes to <%= @store.name%></span>
+        <span class="heading">Change shoes at <%= @store.name%></span>
         <% if @shoes %>
           <form action="/stores/<%= @store.id %>/shoes" method="post">
             <input type="hidden" name="_method" value="patch">
               <% @shoes.each do |shoe| %>
-                <div class="form-group">
-                  <label for="shoe_ids[]"><input type="checkbox" name="shoe_ids[]" value="<%= shoe.id %>"><%= shoe.name %></label>
+                <div class="checkbox">
+                  <label for="shoe_ids[]"><input type="checkbox" name="shoe_ids[]" value="<%= shoe.id %>"
+                    <% if @store.shoes.include?(shoe) %>
+                      checked
+                    <% end %>
+                    ><%= shoe.name %></label>
                 </div>
               <% end %>
             <button type="submit" class="btn btn-success">Add</button>
@@ -105,8 +109,33 @@
         <div class="col-sm-1">
           <button type="submit" class="btn btn-sm btn-success">Add</button>
         </div>
-    </div>
+      </div>
     </form>
+    <br>
+    <% if @shoes and @stores %>
+      <div class="row">
+        <div class="col-sm-12">
+          <form class="form-inline" action="/stores/shoes" method="post">
+            <div class="input-group">
+              <span class='input-group-addon'>Add</span>
+              <select class="selectpicker form-control" name="shoe_to">
+                <% @shoes.each do |shoe| %>
+                  <option value="<%= shoe.id%>"><%= shoe.name%></option>
+                <% end %>
+              </select>
+              <span class='input-group-addon'> to </span>
+              <select class=" selectpicker form-control" name="to_store">
+                <% @stores.each do |store| %>
+                  <option value="<%= store.id%>"><%= store.name%></option>
+                <% end %>
+              </select>
+              <span class="input-group-btn">
+              <button type="submit" class='btn btn-primary'>Go</button></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 <% end %>

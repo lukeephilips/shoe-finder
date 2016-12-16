@@ -8,6 +8,13 @@ get ('/') do
   erb(:index)
 end
 
+post ('/stores/shoes') do
+  shoe = Shoe.find(params['shoe_to'])
+  store = Store.find(params['to_store'])
+  store.shoes.push(shoe)
+  redirect '/'
+end
+
 
 post('/stores/new') do
   if Store.create(:name => params['store_name'])

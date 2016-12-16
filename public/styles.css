@@ -14,3 +14,10 @@ button {
 
 input[type=text] {
 }
+.little-label {
+  width: 10px;
+}
+.little-drop {
+  max-width: 200px;
+  color: red;
+}
