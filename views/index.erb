@@ -35,7 +35,7 @@
                     ><%= shoe.name %></label>
                 </div>
               <% end %>
-            <button type="submit" class="btn <btn-info></btn-info>">Change</button>
+            <button type="submit" class="btn btn-info btn-sm">Change</button>
           </form>
         <% end %>
       </div>
@@ -80,7 +80,7 @@
             <input type="text" name='store_name' placeholder="Add a store" class="form-control input-sm">
           </div>
           <div class="col-sm-1">
-            <button type="submit" class="btn btn-sm btn-success">Add</button>
+            <button type="submit" class="btn btn-sm btn-success" name="add_store">Add store</button>
           </div>
         </div>
       </form>
@@ -106,7 +106,7 @@
           <input type="text" name='shoe_name' placeholder="Add a shoe" class="form-control input-sm">
         </div>
         <div class="col-sm-1">
-          <button type="submit" class="btn btn-sm btn-success">Add</button>
+          <button type="submit" class="btn btn-sm btn-success" name="add_shoe">Add shoe</button>
         </div>
       </div>
     </form>
@@ -133,7 +133,7 @@
                 <% end %>
               </select>
               <span class="input-group-btn">
-              <button type="submit" class='btn btn-primary'>Add</button></span>
+              <button type="submit" class='btn btn-primary btn-sm'>Add</button></span>
             </div>
           </form>
         </div>
