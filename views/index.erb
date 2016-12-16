@@ -6,19 +6,24 @@
               <span class="heading"><%= @store.name %> </span>
             </div>
           </div>
-        <% @store.shoes.each do |shoe|%>
-          <div class="row">
-            <div class="col-sm-4">
-              <span class="store-shoes"><%= shoe.name %></span>
+        <% if @store.shoes.any? %>
+          <% @store.shoes.each do |shoe|%>
+            <div class="row">
+              <div class="col-sm-4">
+                <span class="store-shoes"><%= shoe.name %></span>
+              </div>
+              <div class="col-sm-1">
+                <form action="/stores/<%= @store.id %>/shoes" method="post">
+                  <input type="hidden" name="_method" value="delete">
+                  <input type="hidden" name="shoe_id" value="<%= shoe.id %>">
+                  <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+              </div>
             </div>
-            <div class="col-sm-1">
-              <form action="/stores/<%= @store.id %>/shoes" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input type="hidden" name="shoe_id" value="<%= shoe.id %>">
-                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-              </form>
-            </div>
-          </div>
+          <% end %>
+        <% else%>
+        <p>This store has no shoes. Add some on the left.
+        </p>
         <% end %>
       </div>
       <div class="col-md-5">
